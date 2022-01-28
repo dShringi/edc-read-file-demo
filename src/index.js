@@ -21,10 +21,12 @@ exports.handler = async (event, context) => {
       message: `File ${key} successfully transfered to ${destinationKey}`,
     };
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    console.log('Testig catch.');
     // eslint-disable-next-line max-len
     const message = `Error getting object ${key} from bucket ${bucket}. Make sure they exist and your bucket is in the same region as this function.`;
     console.log(message);
-    throw new Error(message);
+    throw err;
+    // throw new Error(message);
   }
 };
