@@ -58,6 +58,20 @@ describe('Test handler() function', () => {
   });
 
   test('should throw an error', async () => {
+    const event = {
+      'Records': [
+        {
+          's3': {
+            'bucket': {
+              'name': 'edc-read-file-demo',
+            },
+            'object': {
+              'key': 'source/patient_junit.csv',
+            },
+          },
+        },
+      ],
+    };
     const exptectedRes = `Error getting object patient_junit.csv from bucket edc-read-file-demo. Make sure they exist and your bucket is in the same region as this function.`;
     moveObject.mockRejectedValue(new Error(exptectedRes));
     expect(() => handler(event)).rejects.toThrowError();
